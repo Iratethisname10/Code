@@ -33,23 +33,23 @@ local globalConfFilePath = 'vocats-projects/configs/globalConf.bin';
 local isGlobalConfigOn = readfile(globalConfFilePath) == 'true';
 
 local library = {
-    unloadMaid = Maid.new(),
+	unloadMaid = Maid.new(),
 	tabs = {},
 	draggable = true,
 	flags = {},
-	title = string.format('vocat\'s script'),
+	title = string.format('vocat\'s script | Vocat_ on discord'),
 	open = false,
 	popup = nil,
 	instances = {},
 	connections = {},
 	options = {},
 	notifications = {},
-    configVars = {},
+	configVars = {},
 	tabSize = 0,
 	theme = {},
 	foldername = isGlobalConfigOn and 'vocats-projects/configs/global' or string.format('vocats-projects/configs/%s', tostring(LocalPlayer.UserId)),
 	fileext = '.json',
-    chromaColor = Color3.new()
+	chromaColor = Color3.new()
 }
 
 library.originalTitle = library.title;
