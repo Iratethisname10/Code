@@ -3651,7 +3651,7 @@ do -- // Load
     end;
 end;
 
-warn(string.format('[Script] [Library] Loaded in %.02f seconds', tick() - libraryLoadAt));
+warn(string.format('[Library] Loaded in %.02f seconds', tick() - libraryLoadAt));
 
 library.OnFlagChanged:Connect(function(data)
     local keybindExists = library.options[string.lower(data.flag) .. 'Bind'];
