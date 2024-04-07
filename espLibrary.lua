@@ -53,7 +53,8 @@ getgenv().espLibrary = {
 			Offset = 20,
 			DisplayDistance = true,
 			DisplayHealth = true,
-			DisplayName = true
+			DisplayName = true,
+			DisplayTool = true
 		},
 
 		TracersSettings = {
@@ -407,7 +408,11 @@ local Visuals = {
 							Content = Content.." "..Parts.Distance
 						end
 
-						PlayerTable.ESP.Text = (Tool and "["..Tool.Name.."]\n" or "")..Content
+						if Environment.Visuals.ESPSettings.DisplayTool then
+							Content = (Tool and "["..Tool.Name.."]\n" or "")..Content
+						end
+
+						PlayerTable.ESP.Text = Content
 						PlayerTable.ESP.Position = Vector2new(Vector.X, Vector.Y - Environment.Visuals.ESPSettings.Offset - (Tool and 10 or 0))
 					end
 				else
@@ -904,7 +909,8 @@ function Environment.Functions:ResetSettings()
 			TextFont = Drawing.Fonts.UI, -- UI, System, Plex, Monospace
 			DisplayDistance = true,
 			DisplayHealth = true,
-			DisplayName = true
+			DisplayName = true,
+			DisplayTool = true
 		},
 
 		TracersSettings = {
