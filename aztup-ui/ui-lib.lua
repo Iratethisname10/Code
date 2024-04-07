@@ -3296,7 +3296,7 @@ do -- // Load
         local settingsMain = settingsColumn:AddSection('Main');
         local settingsMenu = settingsColumn:AddSection('Menu');
         local configSection = settingsColumn1:AddSection('Configs');
-        local discordSection = settingsColumn:AddSection('Discord');
+        local extraSection = settingsColumn1:AddSection('Extra');
         local BackgroundArray = {};
 
         local Backgrounds = {
@@ -3631,7 +3631,7 @@ do -- // Load
                         library:UpdateConfig();
                     end;
                 end);
-            end,
+            end
         })
 
         local function saveConfigBeforeGameLeave()
@@ -3648,6 +3648,61 @@ do -- // Load
             if (state ~= Enum.TeleportState.Started and state ~= Enum.TeleportState.RequestedFromServer) then return end;
             saveConfigBeforeGameLeave();
         end));
+
+		extraSection:AddToggle({
+			text = 'Anti AFK',
+			callback = function(toggle)
+				if(not toggle) then
+					maid.antiAFK = nil;
+					return
+				end
+
+				maid.antiAFK = LocalPlayer.Idled:Connect(function()
+					virtualUserService:CaptureController();
+					virtualUserService:ClickButton2(Vector2.new());
+				end);
+			end
+		})
+
+		extraSection:AddButton({
+			text = 'Rejoin Server',
+			callback = function()
+				library:UpdateConfig()
+				repeat
+					if #Players:GetPlayers() <= 1 then
+						TeleportService:Teleport(game.PlaceId, LocalPlayer);
+					else
+						TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer);
+					end;
+					task.wait(10);
+				until false
+			end
+		})
+
+		extraSection:AddButton({
+			text = 'Server Hop',
+			callback = function()
+				library:UpdateConfig();
+				repeat
+					TeleportService:Teleport(game.PlaceId, LocalPlayer);
+					task.wait(10);
+				until false
+			end
+		})
+
+		extraSection:AddButton({
+			text = 'Copy game link',
+			callback = function()
+				setclipboard('https://www.roblox.com/games/12077443856/Cali-Shootout-PLAYSTATION-SUPPORT');
+			end;
+		})
+
+		extraSection:AddButton({
+			text = 'Copy javascript invite',
+			callback = function()
+				setclipboard('Roblox.GameLauncher.joinGameInstance('.. game.PlaceId.. ', "'.. game.JobId.. '")');
+			end;
+		})
     end;
 end;
 
