@@ -10,14 +10,17 @@
 
 local select, next, tostring, pcall, getgenv, setmetatable, mathfloor, mathabs, mathcos, mathsin, mathrad, wait = select, next, tostring, pcall, getgenv, setmetatable, math.floor, math.abs, math.cos, math.sin, math.rad, task.wait
 local WorldToViewportPoint, Vector2new, Vector3new, Vector3zero, CFramenew, Drawingnew, Color3fromRGB = nil, Vector2.new, Vector3.new, Vector3.zero, CFrame.new, Drawing.new, Color3.fromRGB
+local cloneref = cloneref or function(instance) return instance end
 
 --// Services
 
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
+local RunService = cloneref(game:GetService("RunService"))
+local UserInputService = cloneref(game:GetService("UserInputService"))
+local Players = cloneref(game:GetService("Players"))
+
+if not Players.LocalPlayer then Players:GetPropertyChangedSignal('LocalPlayer'):Wait() end
+local LocalPlayer = cloneref(Players.LocalPlayer)
+local Camera = cloneref(workspace.CurrentCamera)
 
 --// Variables
 
@@ -885,93 +888,6 @@ function Environment.Functions:Restart()
 	end
 
 	Load()
-end
-
-function Environment.Functions:ResetSettings()
-	Environment.Visuals = {
-		ChamsSettings = {
-			Enabled = false,
-			Color = Color3fromRGB(255, 255, 255),
-			Transparency = 0.2,
-			Thickness = 0,
-			Filled = true,
-			EntireBody = false -- For R15, keep false to prevent lag
-		},
-
-		ESPSettings = {
-			Enabled = true,
-			TextColor = Color3fromRGB(255, 255, 255),
-			TextSize = 14,
-			Center = true,
-			Outline = true,
-			OutlineColor = Color3fromRGB(0, 0, 0),
-			TextTransparency = 0.7,
-			TextFont = Drawing.Fonts.UI, -- UI, System, Plex, Monospace
-			DisplayDistance = true,
-			DisplayHealth = true,
-			DisplayName = true,
-			DisplayTool = true
-		},
-
-		TracersSettings = {
-			Enabled = true,
-			Type = 1, -- 1 - Bottom; 2 - Center; 3 - Mouse
-			Transparency = 0.7,
-			Thickness = 1,
-			Color = Color3fromRGB(255, 255, 255)
-		},
-
-		BoxSettings = {
-			Enabled = true,
-			Type = 1; -- 1 - 3D; 2 - 2D
-			Color = Color3fromRGB(255, 255, 255),
-			Transparency = 0.7,
-			Thickness = 1,
-			Filled = false, -- For 2D
-			Increase = 1
-		},
-
-		HeadDotSettings = {
-			Enabled = true,
-			Color = Color3fromRGB(255, 255, 255),
-			Transparency = 0.5,
-			Thickness = 1,
-			Filled = true,
-			Sides = 30
-		},
-
-		HealthBarSettings = {
-			Enabled = false,
-			Transparency = 0.8,
-			Size = 2,
-			Offset = 10,
-			OutlineColor = Color3fromRGB(0, 0, 0),
-			Blue = 50,
-			Type = 3 -- 1 - Top; 2 - Bottom; 3 - Left; 4 - Right
-		}
-	}
-
-	Environment.Crosshair.Settings = {
-		Enabled = false,
-		Type = 1, -- 1 - Mouse; 2 - Center
-		Size = 12,
-		Thickness = 1,
-		Color = Color3fromRGB(0, 255, 0),
-		Transparency = 1,
-		GapSize = 5,
-		CenterDot = false,
-		CenterDotColor = Color3fromRGB(0, 255, 0),
-		CenterDotSize = 1,
-		CenterDotTransparency = 1,
-		CenterDotFilled = true,
-		CenterDotThickness = 1
-	}
-
-	Environment.Settings = {
-		Enabled = false,
-		TeamCheck = false,
-		AliveCheck = true
-	}
 end
 
 setmetatable(Environment.Functions, {
