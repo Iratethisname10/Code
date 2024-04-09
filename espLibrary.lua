@@ -19,8 +19,8 @@ local UserInputService = cloneref(game:GetService("UserInputService"))
 local Players = cloneref(game:GetService("Players"))
 
 if not Players.LocalPlayer then Players:GetPropertyChangedSignal('LocalPlayer'):Wait() end
-local LocalPlayer = cloneref(Players.LocalPlayer)
-local Camera = cloneref(workspace.CurrentCamera)
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
 
 --// Variables
 
