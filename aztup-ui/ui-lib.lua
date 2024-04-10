@@ -3326,10 +3326,10 @@ do -- // Load
                 makefolder('vocats-projects/CustomBackgrounds');
             end;
 
-            local path = string.format('vocats-projects/CustomBackgrounds/%s.bin', syn.crypt.hash(imageURL));
+            local path = string.format('vocats-projects/CustomBackgrounds/%s.bin', imageURL);
 
             if (not isfile(path)) then
-                local suc, httpRequest = pcall(syn.request, {
+                local suc, httpRequest = pcall(request, {
                     Url = imageURL,
                 });
 
@@ -3342,7 +3342,7 @@ do -- // Load
                 writefile(path, httpRequest.Body);
             end;
 
-            library.main.Image = getsynasset(path);
+            library.main.Image = getcustomasset(path);
 
             local acColor = library.flags.menuBackgroundColor;
             local r, g, b = acColor.R * 255, acColor.G * 255, acColor.B * 255;
@@ -3658,8 +3658,8 @@ do -- // Load
 				end
 
 				maid.antiAFK = LocalPlayer.Idled:Connect(function()
-					virtualUserService:CaptureController();
-					virtualUserService:ClickButton2(Vector2.new());
+					game:GetService("VirtualUser"):CaptureController();
+					game:GetService("VirtualUser"):ClickButton2(Vector2.new());
 				end);
 			end
 		})
