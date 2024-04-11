@@ -3404,7 +3404,7 @@ do -- // Load
             text = 'Open / Close',
             flag = 'UI Toggle',
             nomouse = true,
-            key = 'E',
+            key = Enum.KeyCode.RightControl,
             callback = function() library:Close() end
         })
 
