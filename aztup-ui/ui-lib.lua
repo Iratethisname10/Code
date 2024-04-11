@@ -3422,21 +3422,21 @@ do -- // Load
                 end
             end
         })
-		settingsMenu:AddToggle({
-			text = 'Rainbow Accent Color',
-			flag = 'Rainbow Menu Accent Color',
-			callback = function(t)
-				if (not t) then
-					return maid.rainbowMenuColor;
-				end;
+        settingsMenu:AddToggle({
+            text = 'Rainbow Accent Color',
+            flag = 'Rainbow Menu Accent Color',
+            callback = function(t)
+                if (not t) then
+                    return maid.rainbowMenuColor;
+                end;
 
-				maid.rainbowMenuColor = task.spawn(function()
+                maid.rainbowMenuColor = task.spawn(function()
                     while task.wait() do
                         library.options.menuAccentColor:SetColor(library.chromaColor);
                     end;
                 end);
-			end
-		})
+            end
+        })
 
         settingsMenu:AddToggle({
             text = 'Keybind Visualizer',
