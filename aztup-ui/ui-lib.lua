@@ -3411,7 +3411,7 @@ do -- // Load
         settingsMenu:AddColor({
             text = 'Accent Color',
             flag = 'Menu Accent Color',
-            color = Color3.fromRGB(18, 127, 253),
+            color = Color3.fromRGB(225, 141, 255),
             callback = function(Color)
                 if library.currentTab then
                     library.currentTab.button.TextColor3 = Color
@@ -3427,7 +3427,8 @@ do -- // Load
             flag = 'Rainbow Menu Accent Color',
             callback = function(t)
                 if (not t) then
-                    return maid.rainbowMenuColor;
+					maid.rainbowMenuColor = nil;
+                    return;
                 end;
 
                 maid.rainbowMenuColor = task.spawn(function()
