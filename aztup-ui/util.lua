@@ -103,6 +103,8 @@ function Utility:getClosestCharacter(options)
         if not character or health <= 0 or findChildIsA(character, 'ForceField') then continue end
         if options.checkTeam and Utility:isTeamMate(player) then continue end
 
+		if health >= options.maxHealth then continue end
+
         local head = character and findFirstChild(character, 'Head')
         if not head then continue end
 
