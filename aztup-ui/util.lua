@@ -74,6 +74,7 @@ local function castPlayer(origin, direction, rayParams, playerToFind)
 end
 
 function Utility:getClosestCharacter(options)
+	options = options or {}
     rayParams = options.rayParams or RaycastParams.new()
     rayParams.FilterDescendantsInstances = {}
 
@@ -105,18 +106,22 @@ function Utility:getClosestCharacter(options)
         local head = character and findFirstChild(character, 'Head')
         if not head then continue end
 
-        local newDistance = (myHead.Position - head.Position).Magnitude
-        if newDistance > lastDistance then continue end
+        local newDistance
 
         if mousePos then
             local screenPosition, visibleOnScreen = worldToViewportPoint(camera, head.Position)
             screenPosition = Vector2.new(screenPosition.X, screenPosition.Y)
 
             if (screenPosition - mousePos).Magnitude > maxFov or not visibleOnScreen then continue end
+		else
+			newDistance = (myHead.Position - head.Position).Magnitude
+			if newDistance > lastDistance then continue end
         end
 
         local isBehindWall = options.visibilityCheck and castPlayer(myHead.Position, (head.Position - myHead.Position).Unit * 100, rayParams, head.Parent)
         if isBehindWall then continue end
+		
+		if options.stickyAim and lastPlayer then return end
 
         lastPlayer = {Player = player, Character = character, Health = health}
         lastDistance = newDistance
