@@ -3441,7 +3441,7 @@ do -- // Load
 
         settingsMenu:AddToggle({
             text = 'Keybind Visualizer',
-            state = true,
+            state = false,
             callback = function(state)
                 return visualizer:SetEnabled(state);
             end
