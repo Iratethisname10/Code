@@ -1,6 +1,5 @@
 local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/services.lua'))();
 local Utility = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/util.lua'))();
-local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/ui-lib.lua'))();
 
 local RunService, UserInputService, HttpService = Services:Get('RunService', 'UserInputService', 'HttpService');
 
