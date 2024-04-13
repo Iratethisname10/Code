@@ -5,6 +5,7 @@ local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Irat
 local KeyBindVisualizer = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/bind-viewer.lua'))();
 
 local CoreGui, Players, RunService, TextService, UserInputService, ContentProvider, HttpService, TweenService, GuiService, TeleportService = Services:Get('CoreGui', 'Players', 'RunService', 'TextService', 'UserInputService', 'ContentProvider', 'HttpService', 'TweenService', 'GuiService', 'TeleportService');
+local VirtualUser = game:GetService("VirtualUser")
 
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
 local ToastNotif = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/notifs.lua'))();
@@ -3297,6 +3298,7 @@ do -- // Load
         local settingsMenu = settingsColumn:AddSection('Menu');
         local configSection = settingsColumn1:AddSection('Configs');
         local extraSection = settingsColumn1:AddSection('Extra');
+		local sniperSection = settingsColumn:AddSection('Stream Sniper')
         local BackgroundArray = {};
 
         local Backgrounds = {
@@ -3312,58 +3314,6 @@ do -- // Load
             end;
 
             ContentProvider:PreloadAsync(BackgroundArray);
-        end);
-
-        local lastShownNotifAt = 0;
-
-        local function setCustomBackground()
-            local imageURL = library.flags.customBackground;
-            imageURL = imageURL:gsub('%s', '');
-
-            if (imageURL == '') then return end;
-
-            if (not isfolder('vocats-projects/CustomBackgrounds')) then
-                makefolder('vocats-projects/CustomBackgrounds');
-            end;
-
-            local path = string.format('vocats-projects/CustomBackgrounds/%s.bin', imageURL);
-
-            if (not isfile(path)) then
-                local suc, httpRequest = pcall(request, {
-                    Url = imageURL,
-                });
-
-                if (not suc) then return library:ShowMessage('The url you have specified for the custom background is invalid.'); end;
-
-                if (not httpRequest.Success) then return library:ShowMessage(string.format('Request failed %d', httpRequest.StatusCode)); end;
-                local imgType = httpRequest.Headers['Content-Type']:lower();
-                if (imgType ~= 'image/png' and imgType ~= 'image/jpeg') then return library:ShowMessage('Only PNG and JPEG are supported'); end;
-
-                writefile(path, httpRequest.Body);
-            end;
-
-            library.main.Image = getcustomasset(path);
-
-            local acColor = library.flags.menuBackgroundColor;
-            local r, g, b = acColor.R * 255, acColor.G * 255, acColor.B * 255;
-
-            if (r <= 100 and g <= 100 and b <= 100 and tick() - lastShownNotifAt > 1) then
-                lastShownNotifAt = tick();
-                ToastNotif.new({text = 'Your menu accent color is dark custom background may not show.', duration = 20});
-            end;
-        end;
-
-        settingsMain:AddBox({
-            text = 'Custom Background',
-            tip = 'Put a valid image link here',
-            callback = setCustomBackground
-        });
-
-        library.OnLoad:Connect(function()
-            local customBackground = library.flags.customBackground;
-            if (customBackground:gsub('%s', '') == '') then return end;
-
-            task.defer(setCustomBackground);
         end);
 
         do
@@ -3674,8 +3624,8 @@ do -- // Load
 				end
 
 				maid.antiAFK = LocalPlayer.Idled:Connect(function()
-					game:GetService("VirtualUser"):CaptureController();
-					game:GetService("VirtualUser"):ClickButton2(Vector2.new());
+					VirtualUser:CaptureController();
+					VirtualUser:ClickButton2(Vector2.new());
 				end);
 			end
 		})
