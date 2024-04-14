@@ -34,6 +34,9 @@ local unlockTracers;
 local showHealthBar;
 local proximityArrows;
 local maxProximityArrowDistance;
+local displayName;
+local displayDistance;
+local displayHealth;
 
 local scalarPointAX, scalarPointAY;
 local scalarPointBX, scalarPointBY;
@@ -219,7 +222,11 @@ do
         local label, box, line, healthBar, healthBarValue = self._label, self._box, self._line, self._healthBar, self._healthBarValue;
         local pluginData = self:Plugin();
 
-        local text = '[' .. (pluginData.playerName or self._playerName) .. '] [' .. mathFloor(distance) .. ']\n[' .. mathFloor(health) .. '/' .. mathFloor(maxHealth) .. '] '.. (pluginData.text or '');
+		local name = displayName and '['.. (pluginData.playerName or self._playerName).. '] ' or '';
+		local distance = displayDistance and '[' .. mathFloor(distance) .. ']\n' or '';
+		local health = displayHealth and '[' .. mathFloor(health) .. '/' .. mathFloor(maxHealth) .. '] ' or '';
+		
+        local text = name.. distance.. health.. pluginData.text or '';
 
         setRP(label, 'Visible', visibleOnScreen);
         setRP(label, 'Position', Vector2New(labelPos.X, labelPos.Y - realGetRPProperty(self._labelObject, 'TextBounds').Y));
@@ -361,6 +368,9 @@ do
         showHealthBar = flags.showHealthBar;
         maxProximityArrowDistance = flags.maxProximityArrowDistance;
         proximityArrows = flags.proximityArrows;
+		displayName = flags.displayName;
+		displayDistance = flags.displayDistance;
+		displayHealth = flags.displayHealth;
 
         scalarSize = library.flags.proximityArrowsSize or 20;
 
