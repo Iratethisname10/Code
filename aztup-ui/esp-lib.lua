@@ -225,8 +225,8 @@ do
 		local name = displayName and '['.. (pluginData.playerName or self._playerName).. '] ' or '';
 		local distance = displayDistance and '[' .. mathFloor(distance) .. ']\n' or '';
 		local health = displayHealth and '[' .. mathFloor(health) .. '/' .. mathFloor(maxHealth) .. '] ' or '';
-		
-        local text = name.. distance.. health.. pluginData.text or '';
+
+        local text = name.. distance.. health.. (pluginData.text or '');
 
         setRP(label, 'Visible', visibleOnScreen);
         setRP(label, 'Position', Vector2New(labelPos.X, labelPos.Y - realGetRPProperty(self._labelObject, 'TextBounds').Y));
