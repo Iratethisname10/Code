@@ -13,6 +13,7 @@ local tablefind = table.find
 
 local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/ui-lib.lua'))()
 library.title = 'AirHub with better ui'
+library.gameName = 'aim bot'
 
 local aimbot = library:AddTab('Aimbot')
 local visuals = library:AddTab('Visuals')
