@@ -16,7 +16,6 @@ local TweenService = cloneref(game:GetService('TweenService'));
 local GuiService = cloneref(game:GetService('GuiService'));
 local TeleportService = cloneref(game:GetService('TeleportService'));
 
-
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
 local ToastNotif = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/notifs.lua'))();
 
@@ -3685,7 +3684,7 @@ do -- // Load
     end;
 end;
 
-warn(string.format('[Library] Loaded in %.02f seconds', tick() - libraryLoadAt));
+warn(string.format('[Library 15] Loaded in %.02f seconds', tick() - libraryLoadAt));
 
 library.OnFlagChanged:Connect(function(data)
     local keybindExists = library.options[string.lower(data.flag) .. 'Bind'];
