@@ -5,7 +5,9 @@ local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Irat
 local KeyBindVisualizer = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/bind-viewer.lua'))();
 
 local CoreGui, Players, RunService, TextService, UserInputService, ContentProvider, HttpService, TweenService, GuiService, TeleportService = Services:Get('CoreGui', 'Players', 'RunService', 'TextService', 'UserInputService', 'ContentProvider', 'HttpService', 'TweenService', 'GuiService', 'TeleportService');
-local VirtualUser = game:GetService("VirtualUser")
+
+local cloneref = cloneref or function(instance) return instance end
+local VirtualUser = cloneref(game:GetService("VirtualUser"))
 
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
 local ToastNotif = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/notifs.lua'))();
