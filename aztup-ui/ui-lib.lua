@@ -15,7 +15,6 @@ local HttpService = cloneref(game:GetService('HttpService'));
 local TweenService = cloneref(game:GetService('TweenService'));
 local GuiService = cloneref(game:GetService('GuiService'));
 local TeleportService = cloneref(game:GetService('TeleportService'));
-local VirtualUser = cloneref(game:GetService('VirtualUser'));
 
 
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
@@ -3630,14 +3629,17 @@ do -- // Load
 			text = 'Anti AFK',
 			callback = function(toggle)
 				if(not toggle) then
-					maid.antiAFK = nil;
+					for _, v in next, getconnections(LocalPlayer.Idled) do
+						if (v.Function) then continue end;
+						v:Enable();
+					end;
 					return
 				end
 
-				maid.antiAFK = LocalPlayer.Idled:Connect(function()
-					VirtualUser:CaptureController();
-					VirtualUser:ClickButton2(Vector2.new());
-				end);
+				for _, v in next, getconnections(LocalPlayer.Idled) do
+					if (v.Function) then continue end;
+					v:Disable();
+				end;
 			end
 		})
 
