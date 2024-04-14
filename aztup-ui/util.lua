@@ -1,9 +1,11 @@
 local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/signal.lua'))()
 
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local HttpService = game:GetService("HttpService")
-local CollectionService = game:GetService("CollectionService")
+local cloneref = cloneref or function(instance) return instance end
+
+local Players = cloneref(game:GetService('Players'))
+local UserInputService = cloneref(game:GetService('UserInputService'))
+local HttpService = cloneref(game:GetService('HttpService'))
+local CollectionService = cloneref(game:GetService('CollectionService'))
 
 local LocalPlayer = Players.LocalPlayer
 

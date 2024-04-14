@@ -1,7 +1,10 @@
-local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/services.lua'))();
 local Utility = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/util.lua'))();
 
-local RunService, UserInputService, HttpService = Services:Get('RunService', 'UserInputService', 'HttpService');
+local cloneref = cloneref or function(instance) return instance; end;
+
+local RunService = cloneref(game:GetService('RunService'));
+local UserInputService = cloneref(game:GetService('UserInputService'));
+local HttpService = cloneref(game:GetService('HttpService'));
 
 local EntityESP = {};
 

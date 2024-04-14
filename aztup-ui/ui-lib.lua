@@ -1,13 +1,22 @@
 local libraryLoadAt = tick();
  
 local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/signal.lua'))();
-local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/services.lua'))();
 local KeyBindVisualizer = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/bind-viewer.lua'))();
 
-local CoreGui, Players, RunService, TextService, UserInputService, ContentProvider, HttpService, TweenService, GuiService, TeleportService = Services:Get('CoreGui', 'Players', 'RunService', 'TextService', 'UserInputService', 'ContentProvider', 'HttpService', 'TweenService', 'GuiService', 'TeleportService');
+local cloneref = cloneref or function(instance) return instance; end;
 
-local cloneref = cloneref or function(instance) return instance end
-local VirtualUser = cloneref(game:GetService("VirtualUser"))
+local CoreGui = cloneref(game:GetService('CoreGui'));
+local Players = cloneref(game:GetService('Players'));
+local RunService = cloneref(game:GetService('RunService'));
+local TextService = cloneref(game:GetService('TextService'));
+local UserInputService = cloneref(game:GetService('UserInputService'));
+local ContentProvider = cloneref(game:GetService('ContentProvider'));
+local HttpService = cloneref(game:GetService('HttpService'));
+local TweenService = cloneref(game:GetService('TweenService'));
+local GuiService = cloneref(game:GetService('GuiService'));
+local TeleportService = cloneref(game:GetService('TeleportService'));
+local VirtualUser = cloneref(game:GetService('VirtualUser'));
+
 
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
 local ToastNotif = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/notifs.lua'))();

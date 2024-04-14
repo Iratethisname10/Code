@@ -1,7 +1,7 @@
 local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/signal.lua'))();
 
 local Maid = {}
-Maid.ClassName = "Maid"
+Maid.ClassName = 'Maid'
 
 --- Returns a new Maid object
 -- @constructor Maid.new()
@@ -50,12 +50,12 @@ function Maid:__newindex(index, newTask)
 	tasks[index] = newTask
 
 	if oldTask then
-		if type(oldTask) == "function" then
+		if type(oldTask) == 'function' then
 			oldTask()
-		elseif typeof(oldTask) == "RBXScriptConnection" then
+		elseif typeof(oldTask) == 'RBXScriptConnection' then
 			oldTask:Disconnect();
 		elseif typeof(oldTask) == 'table' then
-			oldTask:Remove();
+			warn('[maid] did not do table:', taskData);
 		elseif (Signal.isSignal(oldTask)) then
 			oldTask:Destroy();
 		elseif (typeof(oldTask) == 'thread') then
@@ -87,7 +87,7 @@ function Maid:DoCleaning()
 
 	-- Disconnect all events first as we know this is safe
 	for index, task in pairs(tasks) do
-		if typeof(task) == "RBXScriptConnection" then
+		if typeof(task) == 'RBXScriptConnection' then
 			tasks[index] = nil
 			task:Disconnect()
 		end
@@ -99,12 +99,12 @@ function Maid:DoCleaning()
 		tasks[index] = nil
 		if type(taskData) == 'function' then
 			taskData()
-		elseif typeof(taskData) == "RBXScriptConnection" then
+		elseif typeof(taskData) == 'RBXScriptConnection' then
 			taskData:Disconnect()
 		elseif (Signal.isSignal(taskData)) then
 			taskData:Destroy();
 		elseif typeof(taskData) == 'table' then
-			taskData:Remove();
+			warn('[maid] did not do table:', taskData);
 		elseif (typeof(taskData) == 'thread') then
 			task.cancel(taskData);
 		elseif taskData.Destroy then

@@ -1,8 +1,10 @@
 local Signal = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/signal.lua'))();
-local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/services.lua'))();
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
 
-local TweenService, UserInputService = Services:Get('TweenService', 'UserInputService');
+local cloneref = cloneref or function(instance) return instance; end;
+
+local TweenService = cloneref(game:GetService('TweenService'));
+local UserInputService = cloneref(game:GetService('UserInputService'));
 
 local Notifications = {};
 

@@ -1,6 +1,8 @@
-local Services = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/services.lua'))();
-local UserInputService = Services:Get('UserInputService');
 local Maid = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/maid.lua'))();
+
+local cloneref = cloneref or function(instance) return instance; end;
+
+local UserInputService = cloneref(game:GetService('UserInputService'));
 
 local keybindVisualizer = {};
 keybindVisualizer.__index = keybindVisualizer;
