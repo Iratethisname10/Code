@@ -12,21 +12,19 @@ local Aimbot, WallHack = getgenv().aimbotLibrary, getgenv().espLibrary
 local tablefind = table.find
 
 local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/aztup-ui/ui-lib.lua'))()
-library.title = 'AirHub with better ui'
-library.gameName = 'aim bot'
+
+library.gameName = 'AirHub'
+library.title = string.format('vcs.xyz | %s', library.gameName)
 
 local aimbot = library:AddTab('Aimbot')
 local visuals = library:AddTab('Visuals')
 local crosshair = library:AddTab('Crosshair')
+local basics = library:AddTab('Basics')
 
-local aimbotLeft = aimbot:AddColumn()
-local aimbotRight = aimbot:AddColumn()
-
-local visualsLeft = visuals:AddColumn()
-local visualsRight = visuals:AddColumn()
-
-local crosshairLeft = crosshair:AddColumn()
-local crosshairRight = crosshair:AddColumn()
+local aimbotLeft, aimbotRight = aimbot:AddColumn(), aimbot:AddColumn()
+local visualsLeft, visualsRight = visuals:AddColumn(), visuals:AddColumn()
+local crosshairLeft, crosshairRight = crosshair:AddColumn(), crosshair:AddColumn()
+local basicsLeft, basicsRight = basics:AddColumn(), basics:AddColumn()
 
 local values = aimbotLeft:AddSection('Values')
 local checks = aimbotLeft:AddSection('Checks')
@@ -49,7 +47,7 @@ local crosshairSettingsCenterDot = crosshairRight:AddSection('Center Dot Setting
 values:AddToggle({
 	text = 'Enabled',
 	flag = 'aim bot enabled',
-	value = Aimbot.Settings.Enabled,
+	state = Aimbot.Settings.Enabled,
 	callback = function(t)
 		Aimbot.Settings.Enabled = t
 	end
@@ -57,7 +55,7 @@ values:AddToggle({
 values:AddToggle({
 	text = 'Toggle',
 	flag = 'aimbot toggle mode',
-	value = Aimbot.Settings.Toggle,
+	state = Aimbot.Settings.Toggle,
 	callback = function(t)
 		Aimbot.Settings.Toggle = t
 	end
@@ -95,7 +93,7 @@ values:AddSlider({
 checks:AddToggle({
 	text = 'Team Check',
 	flag = 'aimbot team check',
-	value = Aimbot.Settings.TeamCheck,
+	state = Aimbot.Settings.TeamCheck,
 	callback = function(t)
 		Aimbot.Settings.TeamCheck = t
 	end
@@ -103,7 +101,7 @@ checks:AddToggle({
 checks:AddToggle({
 	text = 'Wall Check',
 	flag = 'aimbot wall check',
-	value = Aimbot.Settings.WallCheck,
+	state = Aimbot.Settings.WallCheck,
 	callback = function(t)
 		Aimbot.Settings.WallCheck = t
 	end
@@ -111,7 +109,7 @@ checks:AddToggle({
 checks:AddToggle({
 	text = 'Alive Check',
 	flag = 'aimbot alive check',
-	value = Aimbot.Settings.AliveCheck,
+	state = Aimbot.Settings.AliveCheck,
 	callback = function(t)
 		Aimbot.Settings.AliveCheck = t
 	end
@@ -120,7 +118,7 @@ checks:AddToggle({
 --// Aimbot ThirdPerson
 thirdPerson:AddToggle({
 	text = 'Enable Third Person',
-	value = Aimbot.Settings.ThirdPerson,
+	state = Aimbot.Settings.ThirdPerson,
 	callback = function(t)
 		Aimbot.Settings.ThirdPerson = t
 	end
@@ -141,7 +139,7 @@ thirdPerson:AddSlider({
 fovValues:AddToggle({
 	text = "Enabled",
 	flag = 'aimbot fov circle',
-	value = Aimbot.FOVSettings.Enabled,
+	state = Aimbot.FOVSettings.Enabled,
 	callback = function(t)
 		Aimbot.FOVSettings.Enabled = t
 	end
@@ -149,7 +147,7 @@ fovValues:AddToggle({
 fovValues:AddToggle({
 	text = 'Visible',
 	flag = 'aimbot fov circle visible',
-	value = Aimbot.FOVSettings.Visible,
+	state = Aimbot.FOVSettings.Visible,
 	callback = function(t)
 		Aimbot.FOVSettings.Visible = t
 	end
@@ -169,7 +167,7 @@ fovValues:AddSlider({
 fovAppearance:AddToggle({
 	text = 'Filled',
 	flag = 'aimbot filled circle',
-	value = Aimbot.FOVSettings.Filled,
+	state = Aimbot.FOVSettings.Filled,
 	callback = function(t)
 		Aimbot.FOVSettings.Filled = t
 	end
@@ -208,7 +206,7 @@ fovAppearance:AddSlider({
 fovAppearance:AddColor({
 	text = 'Color',
 	flag = 'aimbot circle color',
-	value = Aimbot.FOVSettings.Color,
+	color = Aimbot.FOVSettings.Color,
 	callback = function(val)
 		Aimbot.FOVSettings.Color = val
 	end
@@ -216,7 +214,7 @@ fovAppearance:AddColor({
 fovAppearance:AddColor({
 	text = 'Locked Color',
 	flag = 'aimbot circle locked color',
-	value = Aimbot.FOVSettings.LockedColor,
+	color = Aimbot.FOVSettings.LockedColor,
 	callback = function(val)
 		Aimbot.FOVSettings.LockedColor = val
 	end
@@ -226,7 +224,7 @@ fovAppearance:AddColor({
 wallHackChecks:AddToggle({
 	text = 'Enabled',
 	flag = 'wall hack enabled',
-	value = WallHack.Settings.Enabled,
+	state = WallHack.Settings.Enabled,
 	callback = function(t)
 		WallHack.Settings.Enabled = t
 	end
@@ -234,7 +232,7 @@ wallHackChecks:AddToggle({
 wallHackChecks:AddToggle({
 	text = 'Team Check',
 	flag = 'wall hack team check',
-	value = WallHack.Settings.TeamCheck,
+	state = WallHack.Settings.TeamCheck,
 	callback = function(t)
 		WallHack.Settings.TeamCheck = t
 	end
@@ -242,7 +240,7 @@ wallHackChecks:AddToggle({
 wallHackChecks:AddToggle({
 	text = 'Alive Check',
 	flag = 'wall hack alive check',
-	value = WallHack.Settings.AliveCheck,
+	state = WallHack.Settings.AliveCheck,
 	callback = function(t)
 		WallHack.Settings.AliveCheck = t
 	end
@@ -252,7 +250,7 @@ wallHackChecks:AddToggle({
 espSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'text esp enabled',
-	value = WallHack.Visuals.ESPSettings.Enabled,
+	state = WallHack.Visuals.ESPSettings.Enabled,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.Enabled = t
 	end
@@ -260,7 +258,7 @@ espSettings:AddToggle({
 espSettings:AddToggle({
 	text = 'Outline',
 	flag = 'text esp outline',
-	value = WallHack.Visuals.ESPSettings.Outline,
+	state = WallHack.Visuals.ESPSettings.Outline,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.Outline = t
 	end
@@ -268,7 +266,7 @@ espSettings:AddToggle({
 espSettings:AddToggle({
 	text = 'Display Distance',
 	flag = 'text esp display distance',
-	value = WallHack.Visuals.ESPSettings.DisplayDistance,
+	state = WallHack.Visuals.ESPSettings.DisplayDistance,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.DisplayDistance = t
 	end
@@ -276,7 +274,7 @@ espSettings:AddToggle({
 espSettings:AddToggle({
 	text = 'Display Health',
 	flag = 'text esp display health',
-	value = WallHack.Visuals.ESPSettings.DisplayHealth,
+	state = WallHack.Visuals.ESPSettings.DisplayHealth,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.DisplayHealth = t
 	end
@@ -284,7 +282,7 @@ espSettings:AddToggle({
 espSettings:AddToggle({
 	text = 'Display Name',
 	flag = 'text esp display name',
-	value = WallHack.Visuals.ESPSettings.DisplayName,
+	state = WallHack.Visuals.ESPSettings.DisplayName,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.DisplayName = t
 	end
@@ -292,7 +290,7 @@ espSettings:AddToggle({
 espSettings:AddToggle({
 	text = 'Display Tool',
 	flag = 'text esp display Tool',
-	value = WallHack.Visuals.ESPSettings.DisplayTool,
+	state = WallHack.Visuals.ESPSettings.DisplayTool,
 	callback = function(t)
 		WallHack.Visuals.ESPSettings.DisplayTool = t
 	end
@@ -310,7 +308,7 @@ espSettings:AddSlider({
 espSettings:AddColor({
 	text = 'Text Color',
 	flag = 'text esp text color',
-	value = WallHack.Visuals.ESPSettings.TextColor,
+	color = WallHack.Visuals.ESPSettings.TextColor,
 	callback = function(val)
 		WallHack.Visuals.ESPSettings.TextColor = val
 	end
@@ -318,7 +316,7 @@ espSettings:AddColor({
 espSettings:AddColor({
 	text = 'Outline Color',
 	flag = 'text esp outline color',
-	value = WallHack.Visuals.ESPSettings.OutlineColor,
+	color = WallHack.Visuals.ESPSettings.OutlineColor,
 	callback = function(val)
 		WallHack.Visuals.ESPSettings.OutlineColor = val
 	end
@@ -357,7 +355,7 @@ espSettings:AddList({
 boxesSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'box esp enabled',
-	value = WallHack.Visuals.BoxSettings.Enabled,
+	state = WallHack.Visuals.BoxSettings.Enabled,
 	callback = function(t)
 		WallHack.Visuals.BoxSettings.Enabled = t
 	end
@@ -396,7 +394,7 @@ boxesSettings:AddSlider({
 boxesSettings:AddColor({
 	text = 'Color',
 	flag = 'box esp color',
-	value = WallHack.Visuals.BoxSettings.Color,
+	color = WallHack.Visuals.BoxSettings.Color,
 	callback = function(val)
 		WallHack.Visuals.BoxSettings.Color = val
 	end
@@ -413,7 +411,7 @@ boxesSettings:AddList({
 boxesSettings:AddToggle({
 	text = 'Filled (For 2D)',
 	flag = 'box esp filled',
-	value = WallHack.Visuals.BoxSettings.Filled,
+	state = WallHack.Visuals.BoxSettings.Filled,
 	callback = function(t)
 		WallHack.Visuals.BoxSettings.Filled = t
 	end
@@ -422,7 +420,7 @@ boxesSettings:AddToggle({
 chamsSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'chams enabled',
-	value = WallHack.Visuals.ChamsSettings.Enabled,
+	state = WallHack.Visuals.ChamsSettings.Enabled,
 	callback = function(t)
 		WallHack.Visuals.ChamsSettings.Enabled = t
 	end
@@ -430,7 +428,7 @@ chamsSettings:AddToggle({
 chamsSettings:AddToggle({
 	text = 'Filled',
 	flag = 'chams filled',
-	value = WallHack.Visuals.ChamsSettings.Filled,
+	state = WallHack.Visuals.ChamsSettings.Filled,
 	callback = function(t)
 		WallHack.Visuals.ChamsSettings.Filled = t
 	end
@@ -438,7 +436,7 @@ chamsSettings:AddToggle({
 chamsSettings:AddToggle({
 	text = 'Entire Body (For R15 Rigs)',
 	flag = 'chams whole body',
-	value = WallHack.Visuals.ChamsSettings.EntireBody,
+	state = WallHack.Visuals.ChamsSettings.EntireBody,
 	callback = function(t)
 		WallHack.Visuals.ChamsSettings.EntireBody = t
 	end
@@ -467,7 +465,7 @@ chamsSettings:AddSlider({
 chamsSettings:AddColor({
 	text = 'Color',
 	flag = 'chams color',
-	value = WallHack.Visuals.ChamsSettings.Color,
+	color = WallHack.Visuals.ChamsSettings.Color,
 	callback = function(val)
 		WallHack.Visuals.ChamsSettings.Color = val
 	end
@@ -476,7 +474,7 @@ chamsSettings:AddColor({
 tracersSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'tracers enabled',
-	value = WallHack.Visuals.TracersSettings.Enabled,
+	state = WallHack.Visuals.TracersSettings.Enabled,
 	callback = function(val)
 		WallHack.Visuals.TracersSettings.Enabled = val
 	end
@@ -505,7 +503,7 @@ tracersSettings:AddSlider({
 tracersSettings:AddColor({
 	text = 'Color',
 	flag = 'tracer color',
-	value = WallHack.Visuals.TracersSettings.Color,
+	color = WallHack.Visuals.TracersSettings.Color,
 	callback = function(val)
 		WallHack.Visuals.TracersSettings.Color = val
 	end
@@ -522,14 +520,14 @@ tracersSettings:AddList({
 headDotsSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'head dot enabled',
-	value = false,
+	state = false,
 	callback = function(t)
 		WallHack.Visuals.HeadDotSettings.Enabled = t
 	end
 })
 headDotsSettings:AddToggle({
 	text = "Filled",
-	value = WallHack.Visuals.HeadDotSettings.Filled,
+	state = WallHack.Visuals.HeadDotSettings.Filled,
 	callback = function(t)
 		WallHack.Visuals.HeadDotSettings.Filled = t
 	end
@@ -568,7 +566,7 @@ headDotsSettings:AddSlider({
 headDotsSettings:AddColor({
 	text = 'Color',
 	flag = 'head dot color',
-	value = WallHack.Visuals.HeadDotSettings.Color,
+	color = WallHack.Visuals.HeadDotSettings.Color,
 	callback = function(val)
 		WallHack.Visuals.HeadDotSettings.Color = val
 	end
@@ -577,7 +575,7 @@ headDotsSettings:AddColor({
 healthBarSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'hb enabled',
-	value = WallHack.Visuals.HealthBarSettings.Enabled,
+	state = WallHack.Visuals.HealthBarSettings.Enabled,
 	callback = function(t)
 		WallHack.Visuals.HealthBarSettings.Enabled = t
 	end
@@ -635,7 +633,7 @@ healthBarSettings:AddSlider({
 healthBarSettings:AddColor({
 	text = 'Outline Color',
 	flag = 'hb outline color',
-	value = WallHack.Visuals.HealthBarSettings.OutlineColor,
+	color = WallHack.Visuals.HealthBarSettings.OutlineColor,
 	callback = function(val)
 		WallHack.Visuals.HealthBarSettings.OutlineColor = val
 	end
@@ -645,7 +643,7 @@ healthBarSettings:AddColor({
 crosshairSettings:AddToggle({
 	text = 'Mouse Cursor',
 	flag = 'cs mouse cursor',
-	value = game:GetService("UserInputService").MouseIconEnabled,
+	state = game:GetService("UserInputService").MouseIconEnabled,
 	callback = function(t)
 		game:GetService("UserInputService").MouseIconEnabled = t
 	end
@@ -653,7 +651,7 @@ crosshairSettings:AddToggle({
 crosshairSettings:AddToggle({
 	text = 'Enabled',
 	flag = 'cs enabled',
-	value = WallHack.Crosshair.Settings.Enabled,
+	state = WallHack.Crosshair.Settings.Enabled,
 	callback = function(t)
 		WallHack.Crosshair.Settings.Enabled = t
 	end
@@ -661,7 +659,7 @@ crosshairSettings:AddToggle({
 crosshairSettings:AddColor({
 	text = 'Color',
 	flag = 'cs color',
-	value = WallHack.Crosshair.Settings.Color,
+	color = WallHack.Crosshair.Settings.Color,
 	callback = function(val)
 		WallHack.Crosshair.Settings.Color = val
 	end
@@ -729,7 +727,7 @@ crosshairSettings:AddList({
 crosshairSettingsCenterDot:AddToggle({
 	text = 'Center Dot',
 	flag = 'chc Center Dot',
-	value = WallHack.Crosshair.Settings.CenterDot,
+	state = WallHack.Crosshair.Settings.CenterDot,
 	callback = function(t)
 		WallHack.Crosshair.Settings.CenterDot = t
 	end
@@ -737,7 +735,7 @@ crosshairSettingsCenterDot:AddToggle({
 crosshairSettingsCenterDot:AddColor({
 	text = 'Center Dot Color',
 	flag = 'chc Center Dot Color',
-	value = WallHack.Crosshair.Settings.CenterDotColor,
+	color = WallHack.Crosshair.Settings.CenterDotColor,
 	callback = function(val)
 		WallHack.Crosshair.Settings.CenterDotColor = val
 	end
@@ -766,7 +764,7 @@ crosshairSettingsCenterDot:AddSlider({
 crosshairSettingsCenterDot:AddToggle({
 	text = 'Center Dot Filled',
 	flag = 'chc Center Dot Filled',
-	value = WallHack.Crosshair.Settings.CenterDotFilled,
+	state = WallHack.Crosshair.Settings.CenterDotFilled,
 	callback = function(val)
 		WallHack.Crosshair.Settings.CenterDotFilled = val
 	end
