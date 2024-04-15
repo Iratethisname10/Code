@@ -1,5 +1,8 @@
 -- https://www.roblox.com/games/12077443856/Cali-Shootout-PLAYSTATION-SUPPORT
 
+-- loadstring:
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/scripts/caliShootout.lua'))()
+
 local scriptLoadAt = tick()
 warn('script started load')
 
