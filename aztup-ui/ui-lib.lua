@@ -3295,6 +3295,29 @@ do -- // Load
             ));
         end;
 
+		local joinDiscord;
+
+		do
+			function joinDiscord(code)
+                for i = 6463, 6472 do -- // Just cause there is a 10 range port
+                    if(pcall(function()
+                        syn.request({
+                            Url = ('http://127.0.0.1:%s/rpc?v=1'):format(i),
+                            Method = 'POST',
+                            Headers = {
+                                ['Content-Type'] = 'application/json',
+                                Origin = 'https://discord.com' -- // memery moment
+                            },
+                            Body = ('{"cmd":"INVITE_BROWSER","args":{"code":"%s"},"nonce":"%s"}'):format(code, string.lower(HttpService:GenerateGUID(false)))
+                        });
+                    end)) then
+                        print('found port', i);
+                        break;
+                    end;
+                end;
+            end;
+        end;
+
         local maid = Maid.new();
         library.unloadMaid:GiveTask(function()
             maid:Destroy();
@@ -3307,7 +3330,7 @@ do -- // Load
         local settingsMenu = settingsColumn:AddSection('Menu');
         local configSection = settingsColumn1:AddSection('Configs');
         local extraSection = settingsColumn1:AddSection('Extra');
-		local sniperSection = settingsColumn:AddSection('Stream Sniper')
+		local discordSection = settingsColumn:AddSection('Discord');
         local BackgroundArray = {};
 
         local Backgrounds = {
@@ -3632,8 +3655,9 @@ do -- // Load
 						if (v.Function) then continue end;
 						v:Enable();
 					end;
-					return
-				end
+
+					return;
+				end;
 
 				for _, v in next, getconnections(LocalPlayer.Idled) do
 					if (v.Function) then continue end;
@@ -3681,6 +3705,16 @@ do -- // Load
 				setclipboard('Roblox.GameLauncher.joinGameInstance('.. game.PlaceId.. ', "'.. game.JobId.. '")');
 			end;
 		})
+
+		discordSection:AddButton({
+            text = 'Join Discord',
+            callback = function() return joinDiscord('sRz4eEs9Qk') end
+        });
+
+        discordSection:AddButton({
+            text = 'Copy Discord Invite',
+            callback = function() return setclipboard('discord.gg/sRz4eEs9Qk') end
+        });
     end;
 end;
 
