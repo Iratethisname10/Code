@@ -25,7 +25,7 @@ return function(tab)
 
 	flySection:AddToggle({
 		text = 'Enabled',
-		flag = 'fly'
+		flag = 'fly',
 		callback = function(t)
 			print('tog:', t)
 		end
