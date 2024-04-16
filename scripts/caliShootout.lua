@@ -3,15 +3,6 @@
 -- loadstring:
 -- loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/scripts/caliShootout.lua'))()
 
--- im very sure that this is the first good cali shooutout script made open source
-
--- i made every module here except for:
--- aimbot (from aztup hub, modified abit)
--- anti aim (some counter blox script i forgot, modified abit)
--- antimation player (vape, modified abit)
--- esp (air hub, modified abit)
--- invis (vape bedwars infinite fly); i might remake this some day
-
 local scriptLoadAt = tick()
 warn('script started load')
 
@@ -234,6 +225,7 @@ do -- combat
 		aimbotSection:AddSlider({
 			text = 'Field Of View',
 			flag = 'Aim Bot Field Of View',
+			value = 100,
 			min = 10,
 			max = 1000,
 			callback = function(val)
@@ -248,10 +240,11 @@ do -- combat
 			tip = 'setting value under 2 when using mouse emulation aim method might break',
 			min = 1,
 			max = 20,
-			value = 5
+			value = 2
 		})
 		aimbotSection:AddToggle({
 			text = 'FOV Circle',
+			state = true,
 			flag = 'Aim Bot F O V Circle',
 			callback = function(t)
 				if t then
