@@ -19,12 +19,10 @@ library.title = string.format('vcs.xyz | %s', library.gameName)
 local aimbot = library:AddTab('Aimbot')
 local visuals = library:AddTab('Visuals')
 local crosshair = library:AddTab('Crosshair')
-local basics = library:AddTab('Basics')
 
 local aimbotLeft, aimbotRight = aimbot:AddColumn(), aimbot:AddColumn()
 local visualsLeft, visualsRight = visuals:AddColumn(), visuals:AddColumn()
 local crosshairLeft, crosshairRight = crosshair:AddColumn(), crosshair:AddColumn()
-local basicsLeft, basicsRight = basics:AddColumn(), basics:AddColumn()
 
 local values = aimbotLeft:AddSection('Values')
 local checks = aimbotLeft:AddSection('Checks')
