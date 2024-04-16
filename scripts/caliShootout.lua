@@ -3,6 +3,13 @@
 -- loadstring:
 -- loadstring(game:HttpGet('https://raw.githubusercontent.com/Iratethisname10/Code/main/scripts/caliShootout.lua'))()
 
+-- i made every module here except for:
+-- aimbot (from aztup hub, modified abit)
+-- anti aim (some counter blox script i forgot, modified abit)
+-- antimation player (vape, modified abit)
+-- esp (air hub, modified abit)
+-- invis (vape bedwars infinite fly); i might remake this some day
+
 local scriptLoadAt = tick()
 warn('script started load')
 
