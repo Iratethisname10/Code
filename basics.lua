@@ -32,7 +32,7 @@ return function(tab)
 	}):AddBind({
 		flag = 'fly bind',
 		callback = function()
-			library.flags.fly:SetState(not library.flags.fly)
+			library.options.fly:SetState(not library.flags.fly)
 		end
 	})
 end
