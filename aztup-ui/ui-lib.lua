@@ -2877,11 +2877,11 @@ do -- // Load
         library.tooltip.Position = UDim2.fromScale(10, 10);
     end
 
-    function library:Init(silent)
+    function library:Init()
         if self.hasInit then return end
 
         self.hasInit = true
-        self.base = library:Create('ScreenGui', {IgnoreGuiInset = true, AutoLocalize = false, Enabled = not silent})
+        self.base = library:Create('ScreenGui', {IgnoreGuiInset = true, AutoLocalize = false, Enabled = true})
         self.dummyBox = library:Create('TextBox', {Visible = false, Parent = self.base});
         self.dummyModal = library:Create('TextButton', {Visible = false, Modal = true, Parent = self.base});
 
@@ -3241,11 +3241,7 @@ do -- // Load
 
         self:selectTab(self.tabs[1]);
 
-        if (not silent) then
-            self:Close();
-        else
-            self.open = false;
-        end;
+        self:Close();
 
         library.OnLoad:Fire();
         library.OnLoad:Destroy();
