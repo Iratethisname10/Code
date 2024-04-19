@@ -23,12 +23,6 @@ local cframeNew = CFrame.new
 local cframeAngles = CFrame.Angles
 local instanceNew = Instance.new
 
-local isA = game.IsA
-local findFirstChild = game.FindFirstChild
-local worldToViewportPoint = instanceNew('Camera').WorldToViewportPoint
-local getMouseLocation = userInputService.GetMouseLocation
-local isMouseButtonPressed = userInputService.IsMouseButtonPressed
-
 local maid = Maid.new()
 
 local function sendNotification(text, duration)
@@ -55,7 +49,7 @@ rayParams.RespectCanCollide = true
 rayParams.FilterType = Enum.RaycastFilterType.Exclude
 rayParams.FilterDescendantsInstances = {workspace.CurrentCamera, lplr.Character}
 
-function basics.fly(toggle, horizontalSpeed, verticalSpeed, cframe)
+function basics.fly(toggle, horizontalSpeed, verticalSpeed)
 	if not toggle then
 		flyVertical = 0
 		maid.flyBV = nil
@@ -78,14 +72,13 @@ function basics.fly(toggle, horizontalSpeed, verticalSpeed, cframe)
 		lplr.Character.HumanoidRootPart.AssemblyLinearVelocity = vector3Zero
 		local vector = lplr.Character.Humanoid.MoveDirection
 
-		vector = vector3New(vector.X * horizontalSpeed * delta, flyVertical * delta, vector.Z * horizontalSpeed * delta)
+		local flyVector = vector3New(vector.X * horizontalSpeed * delta, flyVertical * delta, vector.Z * horizontalSpeed * delta)
 
 		maid.flyBV = maid.flyBV or instanceNew('BodyVelocity', lplr.Character.HumanoidRootPart)
 		maid.flyBV.MaxForce = vector3One * math.huge
-		maid.flyBV.Velocity = vector
+		maid.flyBV.Velocity = flyVector
 		
-		if not cframe then return end
-		lplr.Character.HumanoidRootPart.CFrame += vector
+		lplr.Character.HumanoidRootPart.CFrame += flyVector
 	end)
 end
 
@@ -101,9 +94,9 @@ function basics.speed(toggle, speed)
 		lplr.Character.HumanoidRootPart.AssemblyLinearVelocity *= vector3New(0, 1, 0)
 
 		local vector = lplr.Character.Humanoid.MoveDirection
-		vector = vector3New(vector.X * speed * delta, 0, vector.Z * speed * delta)
+		local speedVector = vector3New(vector.X * speed * delta, 0, vector.Z * speed * delta)
 		
-		lplr.Character.HumanoidRootPart.CFrame += vector
+		lplr.Character.HumanoidRootPart.CFrame += speedVector
 	end)
 end
 
