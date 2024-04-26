@@ -170,24 +170,12 @@ do -- combat
 				
 						local camera = workspace.CurrentCamera
 						if not camera then return end
-			
-						local hitPosition2D, visible = camera:WorldToViewportPoint(hitPos)
-						if not visible then return end
-				
-						hitPosition2D = Vector2.new(hitPosition2D.X, hitPosition2D.Y)
-				
-						local mousePosition = userInputService:GetMouseLocation()
-						local final = (hitPosition2D - mousePosition) / library.flags.aimBotSmoothing
 
 						if library.flags.aimBotRequireMouseDown then
 							if not userInputService:IsMouseButtonPressed(library.flags.aimBotMouseButton == 'Left' and 0 or 1) then return end
 						end
 
-						if library.flags.aimBotAimMethod == 'mouse emulation' then
-							mousemoverel(final.X, final.Y)
-						else
-							camera.CFrame = camera.CFrame:lerp(cframeNew(camera.CFrame.Position, hitPos), 1 / library.flags.aimBotSmoothing)
-						end
+						camera.CFrame = camera.CFrame:lerp(cframeNew(camera.CFrame.Position, hitPos), 1 / library.flags.aimBotSmoothing)
 					end)
 				else
 					maid.aimbot = nil
@@ -222,12 +210,6 @@ do -- combat
 				end
 			end
 		})
-		aimbotSection:AddList({
-			text = 'Aim Method',
-			flag = 'Aim Bot Aim Method',
-			values = {'game camera', 'mouse emulation'},
-			value = 'game camera'
-		})
 		aimbotSection:AddSlider({
 			text = 'Field Of View',
 			flag = 'Aim Bot Field Of View',
@@ -243,7 +225,6 @@ do -- combat
 		aimbotSection:AddSlider({
 			text = 'Smoothing',
 			flag = 'Aim Bot Smoothing',
-			tip = 'setting value under 2 when using mouse emulation aim method might break',
 			min = 1,
 			max = 20,
 			value = 2
@@ -259,7 +240,7 @@ do -- combat
 						NumSides = 500,
 						Filled = false,
 						Thickness = 1,
-						Visible = library.flags.aimBot and library.flags.aimBotTargetSelection == 'mouse',
+						Visible = library.flags.aimBot,
 						Radius = library.flags.aimBotFieldOfView,
 						Position = workspace.CurrentCamera.ViewportSize / 2,
 						Color = library.flags.aimBotCircleColor
