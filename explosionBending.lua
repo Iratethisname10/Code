@@ -164,17 +164,17 @@ end;
 local rayParams = RaycastParams.new();
 rayParams.RespectCanCollide = true;
 rayParams.FilterType = Enum.RaycastFilterType.Exclude;
-rayParams.FilterDescendantsInstances = {gameCam, lplr.Character};
 
 while (not _G.stop) do
 	local mouse = lplr:GetMouse();
 	if (not mouse) then return; end;
 
+	rayParams.FilterDescendantsInstances = {gameCam, lplr.Character};
 	local ray = workspace:Raycast(gameCam.CFrame.Position, mouse.UnitRay.Direction * 10000, rayParams)
 
 	if (userInputService:IsKeyDown(Enum.KeyCode.E) and ray and ray.Instance) then
 		doIslam(10, ray)
 	end;
 
-	task.wait(0.36);
+	task.wait();
 end;
