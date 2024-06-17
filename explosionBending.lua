@@ -170,7 +170,7 @@ while (not _G.stop) do
 	local mouse = lplr:GetMouse();
 	if (not mouse) then return; end;
 
-	local ray = workspace:RayCast(gameCam.CFrame.Position, mouse.UnitRay.Direction * 10000, rayParams)
+	local ray = workspace:Raycast(gameCam.CFrame.Position, mouse.UnitRay.Direction * 10000, rayParams)
 
 	if (userInputService:IsKeyDown(Enum.KeyCode.E) and ray and ray.Instance) then
 		doIslam(10, ray)
