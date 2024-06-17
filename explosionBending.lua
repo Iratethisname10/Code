@@ -176,5 +176,5 @@ while (not _G.stop) do
 		doIslam(10, ray)
 	end;
 
-	task.wait();
+	task.wait(0.36);
 end;
