@@ -7,7 +7,7 @@ local players = cloneref(game:GetService('Players'));
 local lplr = cloneref(players.LocalPlayer);
 
 for _, v in lplr.PlayerGui:GetDescendants() do
-	if (not v:IsA('LocalScript') then) continue; end;
+	if (not v:IsA('LocalScript')) then continue; end;
 
 	if (getscripthash(v) == scriptHash) then;
 		v.Parent:Destroy();
