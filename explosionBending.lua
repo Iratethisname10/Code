@@ -14,7 +14,7 @@ local acsEngine = replicatedStorage.ACS_Engine;
 local hitEffect = acsEngine.Events.HitEffect;
 local shellDrop = acsEngine.Events.Shell;
 
-local function doIslam(explosionPower, rayCast)
+local function doMegumin(explosionPower, rayCast)
 	local vec0 = Vector3.new(-59.41989517211914, 445.3965759277344, -584.8765869140625);
 	
 	local args = {
@@ -173,7 +173,7 @@ while (not _G.stop) do
 	local ray = workspace:Raycast(gameCam.CFrame.Position, mouse.UnitRay.Direction * 10000, rayParams)
 
 	if (userInputService:IsKeyDown(Enum.KeyCode.E) and ray and ray.Instance) then
-		doIslam(10, ray)
+		doMegumin(10, ray)
 	end;
 
 	task.wait();
